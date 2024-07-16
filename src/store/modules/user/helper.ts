@@ -15,9 +15,9 @@ export interface UserState {
 export function defaultSetting(): UserState {
   return {
     userInfo: {
-      avatar: '',
+      avatar: '/avatar.png',
       name: '点此设置名字',
-      description: '<a href="http://web.aabao.vip" class="text-blue-500" target="_blank" >Access to OpenAI</a>',
+      description: 'Access to <a href="https://api.aabao.vip" class="text-blue-500" target="_blank" >New API</a>',
     },
   }
 }
