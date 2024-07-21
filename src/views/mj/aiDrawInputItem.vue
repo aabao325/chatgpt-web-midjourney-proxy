@@ -256,7 +256,6 @@ const uploader=(type:string)=>{
     st.value.upType= type;
     fsRef3.value.click();
 }
-
 // const selectFile3=  (input:any)=>{
 //     ms.loading('上传中...');
 //     upImg(input.target.files[0]).then( async(d)=>{
@@ -275,11 +274,9 @@ const uploader=(type:string)=>{
 //             fsRef3.value.value='';
 //             if(d.code== 1){
 //                 if( st.value.upType=='cref'){
-//                     // f.value.cref= d.result[0];
-//                     f.value.cref = base64String;
+//                     f.value.cref= d.result[0];
 //                 }else{
-//                     // f.value.sref= d.result[0];
-//                     f.value.sref = base64String;
+//                     f.value.sref= d.result[0];
 //                 }
 //                 ms.success( t('mj.uploadSuccess'));
 //             }
@@ -311,9 +308,9 @@ const selectFile3 = (input: any) => {
 
         // 根据 upType 确定将 base64 字符串存储到哪个变量
         if (st.value.upType === 'cref') {
-            f.value.cref = base64String;
+            st.value.cref = base64String;
         } else {
-            f.value.sref = base64String;
+            st.value.sref = base64String;
         }
 
         ms.success('上传成功');
@@ -328,7 +325,6 @@ const selectFile3 = (input: any) => {
         reader.readAsDataURL(file);
     }
 };
-
 
 </script>
 <template>
@@ -373,23 +369,39 @@ const selectFile3 = (input: any) => {
         <NInputNumber :min="0" :max="100" v-model:value="f.cw" class="!w-[60%]" size="small" clearable placeholder="0-100 角色参考程度" />
         </section >
     
+        <!-- <section class="mb-4 flex justify-between items-center"  >
+        <div class="w-[45px]">sref</div>
+            <NInput v-model:value="f.sref" size="small" placeholder="图片url 生成风格一致的图像" clearable >
+                 <template #suffix>
+                    <SvgIcon icon="ri:upload-line"  class="cursor-pointer" @click="uploader('sref')"></SvgIcon>
+                </template>
+            </NInput>
+        </section>
+        <section class="mb-4 flex justify-between items-center"  >
+        <div class="w-[45px]">cref</div>
+            <NInput  v-model:value="f.cref" size="small" placeholder="图片url 生成角色一致的图像" clearable>
+                <template #suffix>
+                    <SvgIcon icon="ri:upload-line" class="cursor-pointer"  @click="uploader('cref')"></SvgIcon>
+                </template>
+            </NInput>
+        </section> -->
+
         <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">sref</div>
-            <NInput v-model:value="f.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
-            <template #suffix>
-                <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
-            </template>
-        </NInput>
-    </section>
-
-    <section class="mb-4 flex justify-between items-center">
-        <div class="w-[45px]">cref</div>
-            <NInput v-model:value="f.value.sref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
-            <template #suffix>
-                <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
-            </template>
-        </NInput>
-    </section>
+            <NInput v-model:value="st.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
+                <template #suffix>
+                    <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
+                </template>
+            </NInput>
+        </section>
+        <section class="mb-4 flex justify-between items-center">
+            <div class="w-[45px]">cref</div>
+            <NInput v-model:value="st.value.cref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
+                <template #suffix>
+                    <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
+                </template>
+            </NInput>
+        </section>
    
     
     <div class="mb-1">
