@@ -297,32 +297,13 @@ const selectFile3 = (input: any) => {
     
     reader.onloadend = () => {
         const base64String = reader.result as string;
-        upImg(base64String).then(async (d) => {
-            mlog('selectFile3>> ', d);
-            let data = {
-                action: 'img2txt',
-                data: {
-                    "base64Array": [d]
-                }
-            }
-            // homeStore.setMyData({act:'draw',actData:obj});
-            // input.value.value='';
-            try {
-                d = await mjFetch('/mj/submit/upload-discord-images', data.data);
-                mlog('selectFile3>> ', d);
-                fsRef3.value.value = '';
-                if (d.code == 1) {
-                    if (st.value.upType == 'cref') {
-                        f.value.cref = base64String;
-                    } else {
-                        f.value.sref = base64String;
-                    }
-                    ms.success(t('mj.uploadSuccess'));
-                }
-            } catch (e) {
-                msgRef.value.showError(e);
-            }
-        }).catch(e => msgRef.value.showError(e));
+        if (st.value.upType === 'cref') {
+            f.value.cref = base64String;
+        } else {
+            f.value.sref = base64String;
+        }
+        ms.success(t('mj.uploadSuccess'));
+        fsRef3.value.value = '';
     };
     
     reader.onerror = (error) => {
@@ -381,7 +362,7 @@ const selectFile3 = (input: any) => {
         <div class="w-[45px]">sref</div>
             <NInput v-model:value="f.sref" size="small" placeholder="图片url 生成风格一致的图像" clearable >
                  <template #suffix>
-                    <SvgIcon icon="ri:upload-line"  class="cursor-pointer" @click="uploader('sref')"></SvgIcon>
+                    <SvgIcon icon="ri:upload-line"  class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
                 </template>
             </NInput>
         </section>
@@ -389,7 +370,7 @@ const selectFile3 = (input: any) => {
         <div class="w-[45px]">cref</div>
             <NInput  v-model:value="f.cref" size="small" placeholder="图片url 生成角色一致的图像" clearable>
                 <template #suffix>
-                    <SvgIcon icon="ri:upload-line" class="cursor-pointer"  @click="uploader('cref')"></SvgIcon>
+                    <SvgIcon icon="ri:upload-line" class="cursor-pointer"  @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
                 </template>
             </NInput>
         </section>
