@@ -269,7 +269,7 @@ const selectFile3=  (input:any)=>{
         //homeStore.setMyData({act:'draw',actData:obj});
         //input.value.value='';
         try{
-            d=  await mjFetch('https://api.bltcy.ai/mj/submit/upload-discord-images' , data.data  );
+            d=  await mjFetch('/mj/submit/upload-discord-images' , data.data  );
             mlog('selectFile3>> ',d );
             fsRef3.value.value='';
             if(d.code== 1){
