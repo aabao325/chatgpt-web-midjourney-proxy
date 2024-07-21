@@ -252,10 +252,10 @@ const clearAll=()=>{
   f.value.sref='';
 }
 
-const uploader=(type:string)=>{
-    st.value.upType= type;
-    fsRef3.value.click();
-}
+// const uploader=(type:string)=>{
+//     st.value.upType= type;
+//     fsRef3.value.click();
+// }
 
 // const selectFile3=  (input:any)=>{
 //     ms.loading('上传中...');
@@ -293,27 +293,42 @@ const uploader=(type:string)=>{
 const selectFile3 = (input: any) => {
     ms.loading('上传中...');
     const file = input.target.files[0];
+
+    if (!file) {
+        ms.error('未选择文件');
+        return;
+    }
+
     const reader = new FileReader();
-    
+
     reader.onloadend = () => {
         const base64String = reader.result as string;
-        if (st.value.upType === 'cref') {
-            f.value.cref = base64String;
-        } else {
-            f.value.sref = base64String;
+
+        if (typeof base64String !== 'string') {
+            ms.error('文件读取失败');
+            return;
         }
-        ms.success(t('mj.uploadSuccess'));
-        fsRef3.value.value = '';
+
+        // 根据 upType 确定将 base64 字符串存储到哪个变量
+        if (st.value.upType === 'cref') {
+            st.value.cref = base64String;
+        } else {
+            st.value.sref = base64String;
+        }
+
+        ms.success('上传成功');
+        fsRef3.value.value = ''; // 清空文件输入框
     };
-    
+
     reader.onerror = (error) => {
         msgRef.value.showError(error);
     };
-    
+
     if (file) {
         reader.readAsDataURL(file);
     }
 };
+
 
 </script>
 <template>
