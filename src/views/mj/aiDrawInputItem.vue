@@ -375,7 +375,7 @@ const selectFile3 = (input: any) => {
     
         <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">sref</div>
-        <NInput v-model:value="st.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
+            <NInput v-model:value="st.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
             <template #suffix>
                 <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
             </template>
@@ -384,7 +384,7 @@ const selectFile3 = (input: any) => {
 
     <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">cref</div>
-        <NInput v-model:value="st.value.cref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
+            <NInput v-model:value="st.value.cref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
             <template #suffix>
                 <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
             </template>
