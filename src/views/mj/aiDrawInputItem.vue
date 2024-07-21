@@ -256,6 +256,7 @@ const uploader=(type:string)=>{
     st.value.upType= type;
     fsRef3.value.click();
 }
+
 const selectFile3=  (input:any)=>{
     ms.loading('上传中...');
     upImg(input.target.files[0]).then( async(d)=>{
@@ -274,9 +275,11 @@ const selectFile3=  (input:any)=>{
             fsRef3.value.value='';
             if(d.code== 1){
                 if( st.value.upType=='cref'){
-                    f.value.cref= d.result[0];
+                    // f.value.cref= d.result[0];
+                    f.value.cref = base64String;
                 }else{
-                    f.value.sref= d.result[0];
+                    // f.value.sref= d.result[0];
+                    f.value.sref = base64String;
                 }
                 ms.success( t('mj.uploadSuccess'));
             }
