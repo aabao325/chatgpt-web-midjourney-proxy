@@ -373,22 +373,23 @@ const selectFile3 = (input: any) => {
         <NInputNumber :min="0" :max="100" v-model:value="f.cw" class="!w-[60%]" size="small" clearable placeholder="0-100 角色参考程度" />
         </section >
     
-        <section class="mb-4 flex justify-between items-center"  >
+        <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">sref</div>
-            <NInput v-model:value="f.sref" size="small" placeholder="图片url 生成风格一致的图像" clearable >
-                 <template #suffix>
-                    <SvgIcon icon="ri:upload-line"  class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
-                </template>
-            </NInput>
-        </section>
-        <section class="mb-4 flex justify-between items-center"  >
+        <NInput v-model:value="st.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
+            <template #suffix>
+                <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
+            </template>
+        </NInput>
+    </section>
+
+    <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">cref</div>
-            <NInput  v-model:value="f.cref" size="small" placeholder="图片url 生成角色一致的图像" clearable>
-                <template #suffix>
-                    <SvgIcon icon="ri:upload-line" class="cursor-pointer"  @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
-                </template>
-            </NInput>
-        </section>
+        <NInput v-model:value="st.value.cref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
+            <template #suffix>
+                <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
+            </template>
+        </NInput>
+    </section>
    
     
     <div class="mb-1">
