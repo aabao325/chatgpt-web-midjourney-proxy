@@ -257,39 +257,83 @@ const uploader=(type:string)=>{
     fsRef3.value.click();
 }
 
-const selectFile3=  (input:any)=>{
-    ms.loading('上传中...');
-    upImg(input.target.files[0]).then( async(d)=>{
-        mlog('selectFile3>> ',d );
-        let data={
-            action:'img2txt',
-            data:{
-                "base64Array":[d]
-            }
-        }
-        //homeStore.setMyData({act:'draw',actData:obj});
-        //input.value.value='';
-        try{
-            d=  await mjFetch('/mj/submit/upload-discord-images' , data.data  );
-            mlog('selectFile3>> ',d );
-            fsRef3.value.value='';
-            if(d.code== 1){
-                if( st.value.upType=='cref'){
-                    // f.value.cref= d.result[0];
-                    f.value.cref = base64String;
-                }else{
-                    // f.value.sref= d.result[0];
-                    f.value.sref = base64String;
-                }
-                ms.success( t('mj.uploadSuccess'));
-            }
-        }catch(e ){
-            msgRef.value.showError(e)
-        }
+// const selectFile3=  (input:any)=>{
+//     ms.loading('上传中...');
+//     upImg(input.target.files[0]).then( async(d)=>{
+//         mlog('selectFile3>> ',d );
+//         let data={
+//             action:'img2txt',
+//             data:{
+//                 "base64Array":[d]
+//             }
+//         }
+//         //homeStore.setMyData({act:'draw',actData:obj});
+//         //input.value.value='';
+//         try{
+//             d=  await mjFetch('/mj/submit/upload-discord-images' , data.data  );
+//             mlog('selectFile3>> ',d );
+//             fsRef3.value.value='';
+//             if(d.code== 1){
+//                 if( st.value.upType=='cref'){
+//                     // f.value.cref= d.result[0];
+//                     f.value.cref = base64String;
+//                 }else{
+//                     // f.value.sref= d.result[0];
+//                     f.value.sref = base64String;
+//                 }
+//                 ms.success( t('mj.uploadSuccess'));
+//             }
+//         }catch(e ){
+//             msgRef.value.showError(e)
+//         }
 
-    })
-    .catch(e=>msgRef.value.showError(e))
-}
+//     })
+//     .catch(e=>msgRef.value.showError(e))
+// }
+const selectFile3 = (input: any) => {
+    ms.loading('上传中...');
+    const file = input.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+        const base64String = reader.result as string;
+        upImg(base64String).then(async (d) => {
+            mlog('selectFile3>> ', d);
+            let data = {
+                action: 'img2txt',
+                data: {
+                    "base64Array": [d]
+                }
+            }
+            // homeStore.setMyData({act:'draw',actData:obj});
+            // input.value.value='';
+            try {
+                d = await mjFetch('/mj/submit/upload-discord-images', data.data);
+                mlog('selectFile3>> ', d);
+                fsRef3.value.value = '';
+                if (d.code == 1) {
+                    if (st.value.upType == 'cref') {
+                        f.value.cref = base64String;
+                    } else {
+                        f.value.sref = base64String;
+                    }
+                    ms.success(t('mj.uploadSuccess'));
+                }
+            } catch (e) {
+                msgRef.value.showError(e);
+            }
+        }).catch(e => msgRef.value.showError(e));
+    };
+    
+    reader.onerror = (error) => {
+        msgRef.value.showError(error);
+    };
+    
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+};
+
 </script>
 <template>
 <AiMsg ref="msgRef" />
