@@ -252,10 +252,10 @@ const clearAll=()=>{
   f.value.sref='';
 }
 
-// const uploader=(type:string)=>{
-//     st.value.upType= type;
-//     fsRef3.value.click();
-// }
+const uploader=(type:string)=>{
+    st.value.upType= type;
+    fsRef3.value.click();
+}
 
 // const selectFile3=  (input:any)=>{
 //     ms.loading('上传中...');
@@ -311,9 +311,9 @@ const selectFile3 = (input: any) => {
 
         // 根据 upType 确定将 base64 字符串存储到哪个变量
         if (st.value.upType === 'cref') {
-            st.value.cref = base64String;
+            f.value.cref = base64String;
         } else {
-            st.value.sref = base64String;
+            f.value.sref = base64String;
         }
 
         ms.success('上传成功');
@@ -375,7 +375,7 @@ const selectFile3 = (input: any) => {
     
         <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">sref</div>
-            <NInput v-model:value="st.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
+            <NInput v-model:value="f.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
             <template #suffix>
                 <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
             </template>
@@ -384,7 +384,7 @@ const selectFile3 = (input: any) => {
 
     <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">cref</div>
-            <NInput v-model:value="st.value.cref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
+            <NInput v-model:value="f.value.sref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
             <template #suffix>
                 <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
             </template>
