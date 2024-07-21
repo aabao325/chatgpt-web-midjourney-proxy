@@ -256,75 +256,75 @@ const uploader=(type:string)=>{
     st.value.upType= type;
     fsRef3.value.click();
 }
-// const selectFile3=  (input:any)=>{
-//     ms.loading('上传中...');
-//     upImg(input.target.files[0]).then( async(d)=>{
-//         mlog('selectFile3>> ',d );
-//         let data={
-//             action:'img2txt',
-//             data:{
-//                 "base64Array":[d]
-//             }
-//         }
-//         //homeStore.setMyData({act:'draw',actData:obj});
-//         //input.value.value='';
-//         try{
-//             d=  await mjFetch('/mj/submit/upload-discord-images' , data.data  );
-//             mlog('selectFile3>> ',d );
-//             fsRef3.value.value='';
-//             if(d.code== 1){
-//                 if( st.value.upType=='cref'){
-//                     f.value.cref= d.result[0];
-//                 }else{
-//                     f.value.sref= d.result[0];
-//                 }
-//                 ms.success( t('mj.uploadSuccess'));
-//             }
-//         }catch(e ){
-//             msgRef.value.showError(e)
-//         }
-
-//     })
-//     .catch(e=>msgRef.value.showError(e))
-// }
-const selectFile3 = (input: any) => {
+const selectFile3=  (input:any)=>{
     ms.loading('上传中...');
-    const file = input.target.files[0];
-
-    if (!file) {
-        ms.error('未选择文件');
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-        const base64String = reader.result as string;
-
-        if (typeof base64String !== 'string') {
-            ms.error('文件读取失败');
-            return;
+    upImg(input.target.files[0]).then( async(d)=>{
+        mlog('selectFile3>> ',d );
+        let data={
+            action:'img2txt',
+            data:{
+                "base64Array":[d]
+            }
+        }
+        //homeStore.setMyData({act:'draw',actData:obj});
+        //input.value.value='';
+        try{
+            d=  await mjFetch('/mj/submit/upload-discord-images' , data.data  );
+            mlog('selectFile3>> ',d );
+            fsRef3.value.value='';
+            if(d.code== 1){
+                if( st.value.upType=='cref'){
+                    f.value.cref= d.result[0];
+                }else{
+                    f.value.sref= d.result[0];
+                }
+                ms.success( t('mj.uploadSuccess'));
+            }
+        }catch(e ){
+            msgRef.value.showError(e)
         }
 
-        // 根据 upType 确定将 base64 字符串存储到哪个变量
-        if (st.value.upType === 'cref') {
-            st.value.cref = base64String;
-        } else {
-            st.value.sref = base64String;
-        }
+    })
+    .catch(e=>msgRef.value.showError(e))
+}
+// const selectFile3 = (input: any) => {
+//     ms.loading('上传中...');
+//     const file = input.target.files[0];
 
-        ms.success('上传成功');
-        fsRef3.value.value = ''; // 清空文件输入框
-    };
+//     if (!file) {
+//         ms.error('未选择文件');
+//         return;
+//     }
 
-    reader.onerror = (error) => {
-        msgRef.value.showError(error);
-    };
+//     const reader = new FileReader();
 
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-};
+//     reader.onloadend = () => {
+//         const base64String = reader.result as string;
+
+//         if (typeof base64String !== 'string') {
+//             ms.error('文件读取失败');
+//             return;
+//         }
+
+//         // 根据 upType 确定将 base64 字符串存储到哪个变量
+//         if (st.value.upType === 'cref') {
+//             st.value.cref = base64String;
+//         } else {
+//             st.value.sref = base64String;
+//         }
+
+//         ms.success('上传成功');
+//         fsRef3.value.value = ''; // 清空文件输入框
+//     };
+ 
+//     reader.onerror = (error) => {
+//         msgRef.value.showError(error);
+//     };
+
+//     if (file) {
+//         reader.readAsDataURL(file);
+//     }
+// };
 
 </script>
 <template>
@@ -369,7 +369,7 @@ const selectFile3 = (input: any) => {
         <NInputNumber :min="0" :max="100" v-model:value="f.cw" class="!w-[60%]" size="small" clearable placeholder="0-100 角色参考程度" />
         </section >
     
-        <!-- <section class="mb-4 flex justify-between items-center"  >
+        <section class="mb-4 flex justify-between items-center"  >
         <div class="w-[45px]">sref</div>
             <NInput v-model:value="f.sref" size="small" placeholder="图片url 生成风格一致的图像" clearable >
                  <template #suffix>
@@ -384,9 +384,9 @@ const selectFile3 = (input: any) => {
                     <SvgIcon icon="ri:upload-line" class="cursor-pointer"  @click="uploader('cref')"></SvgIcon>
                 </template>
             </NInput>
-        </section> -->
+        </section>
 
-        <section class="mb-4 flex justify-between items-center">
+        <!-- <section class="mb-4 flex justify-between items-center">
         <div class="w-[45px]">sref</div>
             <NInput v-model:value="st.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
                 <template #suffix>
@@ -401,7 +401,7 @@ const selectFile3 = (input: any) => {
                     <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
                 </template>
             </NInput>
-        </section>
+        </section> -->
    
     
     <div class="mb-1">
