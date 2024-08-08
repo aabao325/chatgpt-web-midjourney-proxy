@@ -1,8 +1,8 @@
 {
   "name": "chatgpt-web-midjourney-proxy",
-  "version": "2.19.5",
+  "version": "2.20.1",
   "private": false,
-  "description": "ChatGPT Web",
+  "description": "ChatGPT Web Midjourney Proxy",
   "author": "Aabao325 <602018325@qq.com>",
   "keywords": [
     "chatgpt-web",

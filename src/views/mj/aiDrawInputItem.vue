@@ -69,7 +69,7 @@ function create( ){
     train( st.value.text.trim()).then(ps=>{
         const rz={ prompt: st.value.text.trim() , drawText: createPrompt( ps) }
         if( ps  ) drawSent(rz)
-        st.value.text=''
+        //st.value.text=''
         st.value.isLoad=false
     }).catch(err=>{
         msgRef.value.showError(err)
@@ -287,46 +287,6 @@ const selectFile3=  (input:any)=>{
     })
     .catch(e=>msgRef.value.showError(e))
 }
-// const selectFile3 = (input: any) => {
-//     ms.loading('上传中...');
-//     const file = input.target.files[0];
-
-//     if (!file) {
-//         ms.error('未选择文件');
-//         return;
-//     }
-
-//     const reader = new FileReader();
-
-//     reader.onloadend = () => {
-//         const base64String = reader.result as string;
-//         fsRef3.value.value = ''; // 清空文件输入框
-        
-//         if (typeof base64String !== 'string') {
-//             ms.error('文件读取失败');
-//             return;
-//         }
-
-//         // 根据 upType 确定将 base64 字符串存储到哪个变量
-//         if (st.value.upType === 'cref') {
-//             f.value.cref = base64String;
-//         } else {
-//             f.value.sref = base64String;
-//         }
-
-//         ms.success('上传成功');
-        
-//     };
- 
-//     reader.onerror = (error) => {
-//         msgRef.value.showError(error);
-//     };
-
-//     if (file) {
-//         reader.readAsDataURL(file);
-//     }
-// }
-
 </script>
 <template>
 <AiMsg ref="msgRef" />
@@ -386,23 +346,6 @@ const selectFile3=  (input:any)=>{
                 </template>
             </NInput>
         </section>
-
-        <!-- <section class="mb-4 flex justify-between items-center">
-        <div class="w-[45px]">sref</div>
-            <NInput v-model:value="st.value.sref" size="small" placeholder="图片base64 生成风格一致的图像" clearable>
-                <template #suffix>
-                    <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'sref'; fsRef3.value.click(); }"></SvgIcon>
-                </template>
-            </NInput>
-        </section>
-        <section class="mb-4 flex justify-between items-center">
-            <div class="w-[45px]">cref</div>
-            <NInput v-model:value="st.value.cref" size="small" placeholder="图片base64 生成角色一致的图像" clearable>
-                <template #suffix>
-                    <SvgIcon icon="ri:upload-line" class="cursor-pointer" @click="() => { st.value.upType = 'cref'; fsRef3.value.click(); }"></SvgIcon>
-                </template>
-            </NInput>
-        </section> -->
    
     
     <div class="mb-1">
